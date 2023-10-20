@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AI4Trust</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" type="text/javascript"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <script crossorigin="anonymous" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" type="text/javascript"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <body>
+      <div class="container">
+        <h1 class="mt-5">AI4Trust - manual manipulations of speech samples for localised spoofing</h1>
+		
+		
+		<br>
+		<h4>Original samples (nat + synth)</h4>
+		
+		
+		<table border="0" class="bottom-three">
+		  <tr>
+            <th style="padding: 20px; font-weight: normal">Natural - "Nicoară crede că acest concurs va avea succes"</th>
+            <th style="padding: 20px; font-weight: normal">Synth - "Nicoară crede că acest concurs va avea succes"</th>
+            <th style="padding: 20px; font-weight: normal">Synth - "Nicoară crede că acest eveniment va avea succes"</th>
+            <th style="padding: 20px; font-weight: normal">Synth - "Vasile crede că acest concurs va avea succes"</th>
+           
+              
+              
+           
+		  </tr>
+          <tr>
+            <td style="padding: 10px; font-weight: normal"><audio controls="controls"><source src="mod_data/orig/adr_diph1_003_22k.wav" type="audio/wav"></audio></td>
+            <td style="padding: 10px; font-weight: normal"><audio controls="controls"><source src="mod_data/orig/sam_diph1_orig_text.wav" type="audio/wav"></audio></td>
+            <td style="padding: 10px; font-weight: normal"><audio controls="controls"><source src="mod_data/orig/sam_diph1_eveniment.wav" type="audio/wav"></audio></td>
+            <td style="padding: 10px; font-weight: normal"><audio controls="controls"><source src="mod_data/orig/sam_diph1_vasile.wav" type="audio/wav"></audio></td>
+            
+		  <tr>
+              
+		</table>
+          
+          <hr>
+        <h4>Waveform based concatenation [Audacity] </h4>
+          
+          <table border="0" class="bottom-three">
+		  <tr>
+              <th style="padding: 20px; font-weight: normal"><b>Spoofed</b> - "Nicoară crede că acest <u>[concurs]</u> va avea succes"</th>
+              <th style="padding: 20px; font-weight: normal"><b>Spoofed</b> - "Nicoară crede că acest <u>[eveniment]</u> va avea succes"</th>
+            <th style="padding: 20px; font-weight: normal"><b>Spoofed</b> - "<u>[Vasile]</u> crede că acest concurs va avea succes"</th>
+              
+		  </tr>
+          <tr>
+            <td><audio controls="controls"><source src="mod_data/audacity/sam_diph1_concurs.wav" type="audio/wav"></audio></td>
+            <td><audio controls="controls"><source src="mod_data/audacity/sam_diph1_eveniment.wav" type="audio/wav"></audio></td>
+            <td><audio controls="controls"><source src="mod_data/audacity/sam_diph1_vasile.wav" type="audio/wav"></audio></td>
+		  <tr>
+              
+		</table>
+          
+          <hr>
+          
+        <h4>HiFi-GAN based concatenation - modifications in MelSpec </h4>
+          
+          <table border="0"  class="bottom-three">
+		  <tr>
+            <th style="padding: 20px; font-weight: normal"><b>Spoofed</b> - "Nicoară crede că acest <u>[concurs]</u> va avea succes"</th>
+            <th style="padding: 20px; font-weight: normal"><b>Spoofed</b> - "Nicoară crede că acest <u>[eveniment]</u> va avea succes"</th>
+            <th style="padding: 20px; font-weight: normal"><b>Spoofed</b> - "<u>[Vasile]</u> crede că acest concurs va avea succes"</th>
+              
+		  </tr>
+          <tr>
+            <td><audio controls="controls"><source src="mod_data/hifigan/mod_concurs_mel_generated_e2e.wav" type="audio/wav"></audio></td>
+            <td><audio controls="controls"><source src="mod_data/hifigan/mod_eveniment_mel_generated_e2e.wav" type="audio/wav"></audio></td>
+            <td><audio controls="controls"><source src="mod_data/hifigan/mod_vasile_mel_generated_e2e.wav" type="audio/wav"></audio></td>
+		  <tr>
+              
+		</table>
+          
+          
+          
+          
+          
+           
+          
+      </div>
+		
+    </body>
+  </body>
+</html>
