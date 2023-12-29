@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta title="Sergio Ponti 16ths Grid">
+    <title>Sergio Ponti - 16ths Grid</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -26,32 +26,6 @@
  	</div>
     </div>
  
-    <div class="row" id="bar-changer" style="width:60%;">
-    	<div class="column">
-    	     <h4 style="margin-top:10px">Change</h4>
-    	</div>
-    	<form name="changerForm">
-    	<div class="column2" >
-	  <input type="radio" id="change1" name="changer" value="0" checked>
-	  <label for="change1">One</label><br>
-	</div>
-	<div class="column2" >
-	  <input type="radio" id="change2" name="changer" value="1">
-	  <label for="change2">Any</label><br> 
-	</div>
-	</form>
-  </div>
-    
-    
-    <!--
-    <div class="row" id="bar-max" >
-    	<div class="column">
-    	     <h3>Repeat bars: </h3>
-    	</div>
-    	<div class="column" >
-    	     <input type="number" id="maxRepeat" name="maxRepeat" value="4" width=3>
-        </div>
-    </div> -->
     
     
     <div class="row">
@@ -64,7 +38,7 @@
 	    	<b> Ride/toms</b>
 	    	<br/><span id='rideno' style="font-size:12pt; ;  border:1px solid black"></span>
 	    	<div id="ride" style="text-align:center"></div>
-	    	<b> Hi-hat foot</b>
+	    	<b> Hi-hat w/foot</b>
 	    	<br/><span id='hhno' style="font-size:12pt; border:1px solid black"></span>
 	    	<div id="hihat" style="text-align:center"></div>
 	     </div>	
@@ -80,7 +54,7 @@
 	    	<b> Ride/toms</b>
 	    	<br/><span id='ridenonext' style="font-size:12pt; border:1px solid black"></span>
 	    	<div id="rideNext" style="text-align:center"></div>
-	    	<b> Hi-hat foot</b>
+	    	<b> Hi-hat w/foot</b>
 	    	<br/><span id='hhnonext' style="font-size:12pt; border:1px solid black"></span>
 	    	<div id="hihatNext" style="text-align:center"></div>	
 	     </div>
@@ -92,7 +66,7 @@
         <div id="play-pause-icon" class="play"></div>
     </button>
   
-
+    <!-- Tempo -->
     <div class="tempo-controls">
         <button class="tempo-change" data-change="-5">-5</button>
         <button class="tempo-change" data-change="-1">-</button>
@@ -105,6 +79,55 @@
         <button class="tempo-change" data-change="+1">+</button>
         <button class="tempo-change" data-change="+5">+5</button>
     </div> 
+    
+    <!-- Changer -->
+    <div class="row" id="bar-changer" style="width:60%;">
+    	<div class="column">
+    	     <h4 style="margin-top:10px">Change</h4>
+    	</div>
+    	<form name="changerForm">
+            <div class="column2" >
+              <input type="radio" id="change1" name="changer" value="0" checked>
+              <label for="change1">One</label><br>
+            </div>
+            <div class="column2" >
+              <input type="radio" id="change2" name="changer" value="1">
+              <label for="change2">Any</label><br> 
+            </div>
+	   </form>
+     </div>
+    
+    
+    <!-- Weighter -->
+    <div class="row" id="bar-changer" style="width:60%;">
+    	<div class="column">
+    	     <h4 style="margin-top:10px">Weighted</h4>
+    	</div>
+    	<form name="weighterForm">
+            <div class="column2" >
+              <input type="radio" id="weight1" name="weighter" value="0" checked>
+              <label for="weight1">Yes</label><br>
+            </div>
+            <div class="column2" >
+              <input type="radio" id="weight2" name="weighter" value="1">
+              <label for="weight2">No</label><br> 
+            </div>
+	   </form>
+     </div>
+    
+    
+    <div class=row>
+        <b style="text-align:left">Notes</b>
+        <ul>
+            <li> <b>Change</b> refers to the number of bars that change from one exercise to the next: one - only one slot; any - at least one, three at max;</li>
+            <li> <b>Weight</b> assigns higher probability to the more complex exercises;</li>
+            <li> The exercises assume an N bar repetition of the current bar followed by a full bar fill of your choice.</li>
+            <li> You can use the space bar to start/stop the metronome.</li>
+        </ul>
+    </div>
+    <hr>
+    
+    <div class=row></div>
 
 
 

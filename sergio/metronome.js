@@ -80,6 +80,7 @@ class Metronome
     	
     	this.repeatBars = 4;//document.getElementById('maxRepeat').value;
     	this.change = 0;
+        this.weight = 0;
         this.clef();
     }
     
@@ -362,8 +363,11 @@ class Metronome
     	document.getElementById('hhno').innerHTML = "&nbsp;C"+(this.randoms[2]+1)+".&nbsp;";
     	
     	//next
-    	//this.generateRandoms();
-        this.generateWeightedRandoms();
+        if (this.weight == 0)
+            this.generateWeightedRandoms();
+        else
+    	   this.generateRandoms();
+        
    	    	
     	this.bass('bassSnareNext', this.randoms[0]);
     	document.getElementById('bassnonext').innerHTML = "&nbsp;A"+(this.randoms[0]+1)+".&nbsp;";

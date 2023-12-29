@@ -88,3 +88,27 @@ document.forms["changerForm"].addEventListener("change", function() {
 });
 
 
+
+var radioButtons = document.getElementsByName("weighter");
+    // Loop through the radio buttons to find the selected one
+    for (var i = 0; i < radioButtons.length; i++) {
+    if (radioButtons[i].checked) {
+        // Display the value of the selected radio button
+        metronome.weight = radioButtons[i].value;
+    }
+}
+
+document.forms["weighterForm"].addEventListener("change", function() {
+    var radioButtons = document.getElementsByName("weighter");
+    // Loop through the radio buttons to find the selected one
+    for (var i = 0; i < radioButtons.length; i++) {
+      if (radioButtons[i].checked) {
+        // Display the value of the selected radio button
+        console.log("Weight value: "+radioButtons[i].value);
+        metronome.weight = radioButtons[i].value;
+        return;
+      }
+    }
+});
+
+
