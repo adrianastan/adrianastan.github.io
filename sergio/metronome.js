@@ -51,7 +51,7 @@ const rideClefs = [[new StaveNote({ keys: ['a/5/x2'], duration: 'q'})], //1
 
 class Metronome
 {
-    constructor(tempo = 120)
+    constructor(tempo = 70)
     {
         this.audioContext = null;
         this.notesInQueue = [];         // notes that have been put into the web audio and may or may not have been played yet {note, time}
