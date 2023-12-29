@@ -14,7 +14,7 @@ document.addEventListener('keyup', event => {
         
     }
   }
-})
+});
 
 
 var metronome = new Metronome();
@@ -51,9 +51,17 @@ for (var i = 0; i < tempoChangeButtons.length; i++) {
 var repeatBars = document.getElementById("maxRepeat");
 metronome.repeatBars = parseInt(repeatBars.value);
 repeatBars.addEventListener('input', function() {
-    metronome.repeatBars = parseInt(repeatBars.value);
+    if (parseInt(repeatBars.value)){
+        metronome.repeatBars = parseInt(repeatBars.value);
+    }
+    else{
+        metronome.repeatBars = 4;
+        console.log("Resetting repeat to 4");
+    }
     console.log("Repeat bars:"+repeatBars.value);
 });
+
+
 
 
 

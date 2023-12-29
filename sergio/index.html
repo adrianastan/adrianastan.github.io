@@ -10,36 +10,33 @@
 
 <body>
     <div class="row" style="margin-top:10px; margin-bottom:10px; text-align:center">
-    	<div class="title">16ths grid</div>
-    	<h4>Sergio Ponti</h4>
+        <div class="title"><b>16ths GRID</b> <br/><span style="font-size:14px">by Sergio PONTI</span></div>
+    	
     </div>
-    <div class="row" id="bar-counter">
+    <div class="row" id="bar-counter" style="margin-bottom:0px; width:60%;">
     	<div class="column">
-    	     <h4 style="margin-top:10px">Bar counter: </h4>
+    	     <h4 style="margin-top:10px">Bar counter</h4>
     	</div>
     	<div class="column2" >
-    		<div id="counter">0</div>
+    		<div id="counter" style="padding:10px">0</div>
         </div>
         <div class="column2" >
  	       <input type="text" class="input" id="maxRepeat" value="4">
  	       <br/> <span>Bar repeats</span>
  	</div>
     </div>
-    
-    
-    
-    
-    <div class="row" id="bar-changer">
+ 
+    <div class="row" id="bar-changer" style="width:60%;">
     	<div class="column">
-    	     <h4 style="margin-top:10px">Change: </h4>
+    	     <h4 style="margin-top:10px">Change</h4>
     	</div>
     	<form name="changerForm">
     	<div class="column2" >
-	  <input type="radio" id="change" name="changer" value="0" checked>
+	  <input type="radio" id="change1" name="changer" value="0" checked>
 	  <label for="change1">One</label><br>
 	</div>
 	<div class="column2" >
-	  <input type="radio" id="change" name="changer" value="1">
+	  <input type="radio" id="change2" name="changer" value="1">
 	  <label for="change2">Any</label><br> 
 	</div>
 	</form>
@@ -59,12 +56,12 @@
     
     <div class="row">
 	  <div class="column">
-	    <h2> Current bar </h2><br/>
+	    <h2 style=""> Current bar </h2><br/>
 	     <div class="current">
-	    	<b> Kick and Snare</b>
+	    	<b> Kick and snare</b>
 	    	<br/>A<span id='bassno' style="font-size:10pt">>0</span>.
 	    	<div id="bassSnare" ></div>
-	    	<b> Ride</b>
+	    	<b> Ride/toms</b>
 	    	<br/>B<span id='rideno' style="font-size:10pt">>0</span>.
 	    	<div id="ride"></div>
 	    	<b> Hi-hat foot</b>
@@ -75,12 +72,12 @@
 	   
 	   
 	   <div class="column">
-	   <h2> Next bar</h2><br/>
+	   <h2 style="margin-left:10px; padding-bottom:0px;"> Next bar</h2><br/>
 	     <div class="next">
-	    	<b> Kick and Snare</b>
+	    	<b> Kick and snare</b>
 	    	<br/>A<span id='bassnonext' style="font-size:10pt">>0</span>.
 	    	<div id="bassSnareNext"></div>
-	    	<b> Ride</b>
+	    	<b> Ride/toms</b>
 	    	<br/>B<span id='ridenonext' style="font-size:10pt">>0</span>.
 	    	<div id="rideNext"></div>
 	    	<b> Hi-hat foot</b>
@@ -90,9 +87,11 @@
 	   </div>
     </div>
     
+   
     <button id="play-button" class="">
         <div id="play-pause-icon" class="play"></div>
     </button>
+  
 
     <div class="tempo-controls">
         <button class="tempo-change" data-change="-5">-5</button>
@@ -105,7 +104,7 @@
 
         <button class="tempo-change" data-change="+1">+</button>
         <button class="tempo-change" data-change="+5">+5</button>
-    </div>
+    </div> 
 
 
 

@@ -19,6 +19,11 @@ function dotted(staveNote, noteIndex = -1) {
   return staveNote;
 }
 
+//bass, ride, hihat
+const weights = [[1,2],
+                 [1,1,2,1,1,1,5,4,3,3,5,1,1,3,1],
+                 [1,2,3]
+                ]
        
 const snareClefs = [[new StaveNote({keys: ['c/5'],duration: 'q'})]];
 const bassClefs = [[new StaveNote({keys: ['f/4'],duration: 'q'})],
@@ -125,11 +130,11 @@ class Metronome
             	this.counter += 1;
             	
             	if (this.counter == repeatBars){
-            		counter.style.background = 'red';
+            		counter.style.background = 'tomato';
             		counter.textContent = this.counter;
             	}
             	else{
-            		counter.style.background = 'green';
+            		counter.style.background = 'mediumseagreen';
             		counter.textContent = this.counter;
             	}
             	if (this.counter == repeatBars + 1){
@@ -141,6 +146,10 @@ class Metronome
             		this.counter = 1;
             		counter.textContent = this.counter;
             	}
+                if (this.counter > repeatBars + 2){
+                    this.counter = 1;
+            		counter.textContent = this.counter;
+                }
             }
             
         }
@@ -185,72 +194,131 @@ class Metronome
     ///////////////////////////
     bass(elementid, rand){
         document.getElementById(elementid).innerHTML = '';
-	const div = document.getElementById(elementid);
-	const renderer = new Renderer(div, Renderer.Backends.SVG);
-	renderer.resize(210, 150);
-	const context = renderer.getContext();
-	const stave = new Stave(0, 0, 200);
-	stave.addClef('percussion').addTimeSignature('2/4');
-	stave.setContext(context).draw();
-	//notes
-	var notes1 = bassClefs[rand];
-	var notes2 = snareClefs[0];
-	const allnotes = notes1.concat(notes2);
-		
-	const beams = Beam.generateBeams(allnotes);
-	Formatter.FormatAndDraw(context, stave, allnotes);
+        const div = document.getElementById(elementid);
+        const renderer = new Renderer(div, Renderer.Backends.SVG);
+        renderer.resize(220, 90);
+        const context = renderer.getContext();
+        const stave = new Stave(0, 0, 200);
+        stave.addClef('percussion').addTimeSignature('2/4');
+        stave.setContext(context).draw();
+        //notes
+        var notes1 = bassClefs[rand];
+        var notes2 = snareClefs[0];
+        const allnotes = notes1.concat(notes2);
+        const beams = Beam.generateBeams(allnotes);
+        Formatter.FormatAndDraw(context, stave, allnotes);
 
-	// Draw the beams and stems.
-	beams.forEach((b) => {
-	  b.setContext(context).draw();
-	});
+        // Draw the beams and stems.
+        beams.forEach((b) => {
+          b.setContext(context).draw();
+        });
     }
     
     
     //ride
     ride(elementid, rand){
         document.getElementById(elementid).innerHTML = '';
-	const div = document.getElementById(elementid);
-	const renderer = new Renderer(div, Renderer.Backends.SVG);
-	renderer.resize(220, 120);
-	const context = renderer.getContext();
-	const stave = new Stave(0, 0, 200);
-	stave.addClef('percussion').addTimeSignature('2/4');
-	// Connect it to the rendering context and draw!
-	stave.setContext(context).draw();
+        const div = document.getElementById(elementid);
+        const renderer = new Renderer(div, Renderer.Backends.SVG);
+        renderer.resize(220, 120);
+        const context = renderer.getContext();
+        const stave = new Stave(0, 0, 200);
+        stave.addClef('percussion').addTimeSignature('2/4');
+        // Connect it to the rendering context and draw!
+        stave.setContext(context).draw();
 
-	// Create the notes
-	const notes1 = rideClefs[rand];
-	const beams = Beam.generateBeams(notes1);
-	Formatter.FormatAndDraw(context, stave, notes1);
+        // Create the notes
+        const notes1 = rideClefs[rand];
+        const beams = Beam.generateBeams(notes1);
+        Formatter.FormatAndDraw(context, stave, notes1);
 
-	// Draw the beams and stems.
-	beams.forEach((b) => {
-	  b.setContext(context).draw();
-	});
+        // Draw the beams and stems.
+        beams.forEach((b) => {
+          b.setContext(context).draw();
+        });
     }
     
     /* hihat () */
     hihat(elementid, rand){
         document.getElementById(elementid).innerHTML = '';
-	const div = document.getElementById(elementid);
-	const renderer = new Renderer(div, Renderer.Backends.SVG);
-	renderer.resize(210, 90);
-	const context = renderer.getContext();
-	const stave = new Stave(0, 0, 200);
-	stave.addClef('percussion').addTimeSignature('2/4');
-	stave.setContext(context).draw();
+        const div = document.getElementById(elementid);
+        const renderer = new Renderer(div, Renderer.Backends.SVG);
+        renderer.resize(210, 90);
+        const context = renderer.getContext();
+        const stave = new Stave(0, 0, 200);
+        stave.addClef('percussion').addTimeSignature('2/4');
+        stave.setContext(context).draw();
 
-	// Create the notes
-	const notes1 = hihatClefs[rand];
-	const beams = Beam.generateBeams(notes1);
+        // Create the notes
+        const notes1 = hihatClefs[rand];
+        const beams = Beam.generateBeams(notes1);
 
-	Formatter.FormatAndDraw(context, stave, notes1);
-	// Draw the beams and stems.
-	beams.forEach((b) => {
-	  b.setContext(context).draw();
-	});
+        Formatter.FormatAndDraw(context, stave, notes1);
+        // Draw the beams and stems.
+        beams.forEach((b) => {
+          b.setContext(context).draw();
+        });
     }
+    
+    
+    weightedRandom(weights) {
+      
+      // Preparing the cumulative weights array.
+      // For example:
+      // - weights = [1, 4, 3]
+      // - cumulativeWeights = [1, 5, 8]
+      const cumulativeWeights = [];
+      for (let i = 0; i < weights.length; i += 1) {
+        cumulativeWeights[i] = weights[i] + (cumulativeWeights[i - 1] || 0);
+      }
+      // Getting the random number in a range of [0...sum(weights)]
+      // For example:
+      // - weights = [1, 4, 3]
+      // - maxCumulativeWeight = 8
+      // - range for the random number is [0...8]
+        
+        
+        
+      const maxCumulativeWeight = cumulativeWeights[cumulativeWeights.length - 1];
+      const randomNumber = maxCumulativeWeight * Math.random();
+      // Picking the random item based on its weight.
+      // The items with higher weight will be picked more often.
+      for (let itemIndex = 0; itemIndex < weights.length; itemIndex += 1) {
+        if (cumulativeWeights[itemIndex] >= randomNumber) {
+          return itemIndex;
+        }
+      }
+    }
+    
+    
+    generateWeightedRandoms(){
+        console.log("change value: "+this.change);
+        
+    	if (this.change != 0){
+    	    /* can change any, but at least one */
+    	    var randoms = [this.weightedRandom(weights[0]),
+    			           this.weightedRandom(weights[1]),
+    			           this.weightedRandom(weights[2])];
+    	    while ((randoms[0]==this.randoms[0]) && (randoms[1]==this.randoms[1]) && (randoms[2]==this.randoms[2])){
+    	        randoms = [this.weightedRandom(weights[0]),
+    			           this.weightedRandom(weights[1]),
+    			           this.weightedRandom(weights[2])];
+    	    }
+    	    this.randoms = randoms;
+   	
+    	}  
+    	else{
+    	   /* change only one limb */
+    	   const limb = this.weightedRandom([1,2,1]);
+    	   var new_val = this.weightedRandom(weights[limb]);
+    	   
+            while (new_val == this.randoms[limb]){
+    	   	new_val = this.weightedRandom(weights[limb]);
+    	   }
+    	   this.randoms[limb] = new_val;
+    	}
+    }
+    
     
     
     generateRandoms(){
@@ -294,7 +362,8 @@ class Metronome
     	document.getElementById('hhno').innerHTML = this.randoms[2]+1;
     	
     	//next
-    	this.generateRandoms();
+    	//this.generateRandoms();
+        this.generateWeightedRandoms();
    	    	
     	this.bass('bassSnareNext', this.randoms[0]);
     	document.getElementById('bassnonext').innerHTML = this.randoms[0]+1;

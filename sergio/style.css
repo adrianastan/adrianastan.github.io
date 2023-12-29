@@ -3,7 +3,7 @@
 }
 
 html {
-    height: 90%;
+    height: 100%;
 }
 
 
@@ -16,17 +16,22 @@ body {
     display: flex;
     align-items: center;
     flex-flow: column;
-    justify-content: center;
-    height: 100%;
-    font-family: Arial, sans-serif;
+    font-family: Gill Sans, sans-serif;
     color: #000;
     
 }
 
 .row{
-	width: 95%;
+	width: 60%;
 	
 }
+
+@media only screen and (max-width: 700px) {
+    .row{
+	   width: 100%;
+    }
+}
+
 
 
 .column {
@@ -45,12 +50,12 @@ body {
 }
 
 .current {
-   padding:50px;
+   padding:10px;
    background: orange;
  }
 
 .next {
-   padding:50px;
+   padding:10px;
    margin-left: 10px;
    background: #ADD8E6;
  }
@@ -131,6 +136,7 @@ body {
 
 #bar-changer label{	
    font-size:12pt;
+    font-weight:500;
 }
 
 #bar-changer .column2{
@@ -147,7 +153,7 @@ body {
 }
 
 #bar-counter #counter{
-	margin-top:10px;
+	/*margin-top:10px;*/
 	font-size:16pt;
 }
 
