@@ -355,22 +355,22 @@ class Metronome
     {
     	//current
         this.bass('bassSnare', this.randoms[0]);
-        document.getElementById('bassno').innerHTML = this.randoms[0]+1;
+        document.getElementById('bassno').innerHTML = "&nbsp;A"+(this.randoms[0]+1)+".&nbsp;";
     	this.ride('ride', this.randoms[1]);
-    	document.getElementById('rideno').innerHTML = this.randoms[1]+1;	
+    	document.getElementById('rideno').innerHTML = "&nbsp;B"+(this.randoms[1]+1)+".&nbsp;";	
     	this.hihat('hihat', this.randoms[2]);
-    	document.getElementById('hhno').innerHTML = this.randoms[2]+1;
+    	document.getElementById('hhno').innerHTML = "&nbsp;C"+(this.randoms[2]+1)+".&nbsp;";
     	
     	//next
     	//this.generateRandoms();
         this.generateWeightedRandoms();
    	    	
     	this.bass('bassSnareNext', this.randoms[0]);
-    	document.getElementById('bassnonext').innerHTML = this.randoms[0]+1;
+    	document.getElementById('bassnonext').innerHTML = "&nbsp;A"+(this.randoms[0]+1)+".&nbsp;";
     	this.ride('rideNext', this.randoms[1]);
-    	document.getElementById('ridenonext').innerHTML = this.randoms[1]+1;
+    	document.getElementById('ridenonext').innerHTML = "&nbsp;B"+(this.randoms[1]+1)+".&nbsp;";
     	this.hihat('hihatNext', this.randoms[2]);
-    	document.getElementById('hhnonext').innerHTML = this.randoms[2]+1;
+    	document.getElementById('hhnonext').innerHTML = "&nbsp;C"+(this.randoms[2]+1)+".&nbsp;";
     }
     
     
