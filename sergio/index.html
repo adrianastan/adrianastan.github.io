@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16ths grid</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="row" >
+    	<div class="title">16ths Grid</div>
+    </div>
+    <div class="row" id="bar-counter">
+    	<div class="column">
+    	     <h2 style="margin-top:10px">Bar counter: </h2>
+    	</div>
+    	<div class="column2" >
+    		<div id="counter">0</div>
+        </div>
+        <div class="column2" >
+ 	       <input type="text" class="input" id="maxRepeat" value="4">
+ 	       <br/> <span>Bar repeats</span>
+ 	</div>
+    </div>
+    
+    
+    
+    
+    <div class="row" id="bar-changer">
+    	<div class="column">
+    	     <h2 style="margin-top:10px">Change: </h2>
+    	</div>
+    	<form name="changerForm">
+    	<div class="column2" >
+	  <input type="radio" id="change" name="changer" value="0" checked>
+	  <label for="change1">Only one</label><br>
+	</div>
+	<div class="column2" >
+	  <input type="radio" id="change" name="changer" value="1">
+	  <label for="change2">Any</label><br> 
+	</div>
+	</form>
+  </div>
+    
+    
+    <!--
+    <div class="row" id="bar-max" >
+    	<div class="column">
+    	     <h3>Repeat bars: </h3>
+    	</div>
+    	<div class="column" >
+    	     <input type="number" id="maxRepeat" name="maxRepeat" value="4" width=3>
+        </div>
+    </div> -->
+    
+    
+    <div class="row">
+	  <div class="column">
+	    <h2> Current bar </h2><br/>
+	     <div class="current">
+	    	<b> Kick and Snare</b>
+	    	<br/>A<span id='bassno' style="font-size:10pt">>0</span>.
+	    	<div id="bassSnare" ></div>
+	    	<b> Ride</b>
+	    	<br/>B<span id='rideno' style="font-size:10pt">>0</span>.
+	    	<div id="ride"></div>
+	    	<b> Hi-hat foot</b>
+	    	<br/>C<span id='hhno' style="font-size:10pt">0</span>.
+	    	<div id="hihat"></div>
+	     </div>	
+	   </div>
+	   
+	   
+	   <div class="column">
+	   <h2> Next bar</h2><br/>
+	     <div class="next">
+	    	<b> Kick and Snare</b>
+	    	<br/>A<span id='bassnonext' style="font-size:10pt">>0</span>.
+	    	<div id="bassSnareNext"></div>
+	    	<b> Ride</b>
+	    	<br/>B<span id='ridenonext' style="font-size:10pt">>0</span>.
+	    	<div id="rideNext"></div>
+	    	<b> Hi-hat foot</b>
+	    	<br/>C<span id='hhnonext' style="font-size:10pt">0</span>.
+	    	<div id="hihatNext"></div>	
+	     </div>
+	   </div>
+    </div>
+    
+    <button id="play-button" class="">
+        <div id="play-pause-icon" class="play"></div>
+    </button>
+
+    <div class="tempo-controls">
+        <button class="tempo-change" data-change="-5">-5</button>
+        <button class="tempo-change" data-change="-1">-</button>
+
+        <div class="tempo-container">
+            <div id="tempo">120</div>
+            <div class="bpm">bpm</div><br/>
+        </div>
+
+        <button class="tempo-change" data-change="+1">+</button>
+        <button class="tempo-change" data-change="+5">+5</button>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.2/build/cjs/vexflow.js"></script>
+    <script src="metronome.js"></script>
+    <script src="app.js"></script>
+    
+</body>
+</html>
