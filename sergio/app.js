@@ -5,6 +5,14 @@ var counter = document.getElementById('counter');
 document.addEventListener('keyup', event => {
   if (event.code === 'Space') {
     metronome.startStop(counter);
+    
+    if (metronome.isRunning) {
+        playPauseIcon.className = 'pause';
+    }
+    else {
+        playPauseIcon.className = 'play';
+        
+    }
   }
 })
 
