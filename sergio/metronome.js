@@ -224,7 +224,7 @@ class Metronome
         renderer.resize(220, 120);
         const context = renderer.getContext();
         const stave = new Stave(0, 0, 200);
-        stave.addClef('percussion').addTimeSignature('2/4');
+        stave.addClef('percussion').addTimeSignature('1/4');
         // Connect it to the rendering context and draw!
         stave.setContext(context).draw();
 
@@ -247,7 +247,7 @@ class Metronome
         renderer.resize(210, 90);
         const context = renderer.getContext();
         const stave = new Stave(0, 0, 200);
-        stave.addClef('percussion').addTimeSignature('2/4');
+        stave.addClef('percussion').addTimeSignature('1/4');
         stave.setContext(context).draw();
 
         // Create the notes
@@ -293,7 +293,7 @@ class Metronome
     
     
     generateWeightedRandoms(){
-        console.log("change value: "+this.change);
+        //console.log("change value: "+this.change);
         
     	if (this.change != 0){
     	    /* can change any, but at least one */
@@ -323,7 +323,7 @@ class Metronome
     
     
     generateRandoms(){
-        console.log("change value: "+this.change);
+        //console.log("change value: "+this.change);
     	if (this.change != 0){
     	    /* can change any, but at least one */
     	    var randoms = [Math.floor(Math.random() * this.lengths[0]),
