@@ -25,73 +25,78 @@
     </div>
     	
     <!-- BAR COUNTER -->
-    <div class="row" id="bar-counter" style="margin-bottom:0px; width:60%; padding-top:10px">
+    <div class="row" id="bar-counter" style="margin-bottom:0px; padding-top:15px;width:60%; ">
     	<div class="column" style="width:20%">
-    	     <h4 style="margin-top:20px;font-size:24px">BAR</h4>
+    	     <h4 style="margin-top:25px;font-size:24px">BAR</h4>
     	</div>
     	<div class="column2" style="width:60%">
     		<div id="counter" style="padding:20px">0</div>
         </div>
         <div class="column2" style="width:20%; padding-top:10px">
- 	       <input type="text" class="input" id="maxRepeat" value="4">
+ 	       <input type="number" class="input" id="maxRepeat" value="4">
  	       <br/> <span>Repeat</span>
- 	</div>
+ 	    </div>
+    </div>
+    <div class="row" style="text-align:center; color:mediumseagreen; font-size:14pt">
+        <i class="fas fa-circle" id="circle1"></i>
+        <i class="fas fa-circle" id="circle2"></i>
+        <i class="fas fa-circle" id="circle3"></i>
+        <i class="fas fa-circle" id="circle4"></i>
     </div>
     
     <!-- SETTINGS -->
     <div class="row" id="bar-changer" style="width:60%;">
     	<div class="options" id="options">
 	      <i class="fa fa-caret-down up"></i>
-	       
-	   
-    	   
-	   <!-- Changer -->
-	   <div class="row"  style="width:90%; border:0.5px solid gray">
-    	     <form name="changerForm">
-    	       <div class="column" style="text-align:right; padding-top:10px"><b>Change </b><br/></div>
-            	   <div class="column2" style="width:10%"> 
-              	      <input type="radio" id="change1" name="changer" value="0" checked>
-              	      <label for="change1" style="font-size:10pt; w">One </label><br>
-              	   </div>
-            	  <div class="column2" style="width:10%">
-		      <input type="radio" id="change2" name="changer" value="1" >
-		      <label  style="font-size:10pt" for="change1">Any</label><br>
-		  </div>
-		  <div class="column2" style="width:30%">
-		      <span style="font-size:10pt; text-align:left; color:gray; font-weight:200;">number of bars that change from one exercise to the next: one - only one slot; any - at least one, three at max.</span>
-		  </div>
-	     </form>
-	   </div>  	   	
+	           	   
+           <!-- Changer -->
+           <div class="row"  style="width:95%; border:0.5px solid gray">
+                 <form name="changerForm">
+                       <div class="column" style="text-align:right; padding-top:10px;width:20%"><b>Change</b>
+                        <br/>
+                       </div>
+                       <div class="column2" style="width:10%"> 
+                          <input type="radio" id="change1" name="changer" value="0" checked>
+                          <label for="change1" style="font-size:10pt; w">One </label><br>
+                       </div>
+                       <div class="column2" style="width:10%">
+                          <input type="radio" id="change2" name="changer" value="1" >
+                          <label  style="font-size:10pt" for="change1">Any</label><br>
+                       </div>
+                       <div class="column2" style="width:50%">
+                          <span style="font-size:10pt; text-align:left; color:gray; font-weight:200;">number of bars that change from one exercise to the next: one - only one slot; any - at least one, three at max.</span>
+                       </div>
+                </form>
+           </div>  	   	
+            
+           <!-- Weighter-->
+           <div class='row'  style="width:95%; border:0.5px solid gray; margin-top:15px">
+                <form name="weighterForm">
+                    <div class="column" style="text-align:right;padding-top:10px; width:20%"><b>Weighted</b><br/></div>
+                    <div class="column2" style="width:10%">
+                          <input type="radio" id="weight2" name="weighter" value="1" checked>
+                          <label style="font-size:10pt" for="weight2">No</label><br> 
+                    </div>
+                    <div class="column2" style="width:10%">
+                          <input type="radio" id="weight1" name="weighter" value="0">
+                          <label for="weight1" style="font-size:10pt">Yes</label><br>
+                    </div>
 
-	   <!-- Weighter -->
-	   <div class='row'  style="width:90%; border:0.5px solid gray; margin-top:15px">
-	   	<form name="weighterForm">
-	   	<div class="column" style="text-align:right;padding-top:10px"><b>Weighter</b><br/></div>
-            	<div class="column2" style="width:10%">
-		      <input type="radio" id="weight1" name="weighter" value="0" checked>
-		      <label for="weight1" style="font-size:10pt">Yes</label><br>
-            	</div>
-            	<div class="column2" style="width:10%">
-		      <input type="radio" id="weight2" name="weighter" value="1" >
-		      <label style="font-size:10pt" for="weight2">No</label><br> 
-		      
-            	</div>
-            	<div class="column2" style="width:30%">
-		      <span style="font-size:10pt; text-align:left !important; color:gray; font-weight:200;">assigns higher probability to the more complex exercises;</span>
-		  </div>
-	   	</form>
-	   </div>
-	   
-	   
-	   	
-	    <div class=row style="width:90%; text-align:left; font-size:10pt">
-		<b style="text-align:left">Notes</b><br/>
-		 The exercises assume an N bar repetition of the current bar followed by a full bar fill of your choice.</br>
-		 You can use the space bar to start/stop the metronome.
-		
-	    </div>
-	    
-	    
+                    <div class="column2" style="width:50%">
+                            <span style="font-size:10pt; text-align:left !important; color:gray; font-weight:200;">assigns higher probability to the more complex exercises;</span>
+                    </div>
+                </form>
+           </div>
+             
+
+            <!-- Notes -->
+            <div class=row style="width:90%; text-align:left; font-size:10pt">
+                <b style="text-align:left">Notes</b><br/>
+             The exercises assume an N bar repetition of the current bar followed by a full bar fill of your choice.<br/>
+             You can use the space bar to start/stop the metronome.
+
+           </div>
+	        
     	</div>
     </div>
  
@@ -99,8 +104,8 @@
     <!-- SCORE-->
     <div class="row">
 	  <div class="column">
-	    <h2 style="margin-left:10px; padding-bottom:0px;font-size:20pt; color:dodgerblue""> Current bar <i class="fas fa-drum"></i></i>
-	       </h2><br/>
+	    <h2 style="margin-left:10px; padding-bottom:0px;font-size:20pt; color:dodgerblue"> Current bar <i class="fas fa-drum"></i></h2><br/>
+                                                                                                                       
 	     <div class="current">
 	    	<b> Kick and snare</b>
 	    	<br/><span id='bassno' style="font-size:12pt; border:1px solid black"></span>
@@ -148,24 +153,7 @@
 
         <button class="tempo-change" data-change="+1" style="font-weight:bold">+</button>
         <button class="tempo-change" data-change="+5" style="font-weight:bold">+5</button>
-    </div> 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class=row></div>
-    
-    
-    
-    
-
+    </div>     
 
 
     <script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.2/build/cjs/vexflow.js"></script>
