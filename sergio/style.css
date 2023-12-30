@@ -3,30 +3,89 @@
 }
 
 html {
-    height: 90%;
+    height: 100%;
 }
 
 
 h2{
    font-size:12pt;
    }
+   
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 
 body {
     background-color: #fff;
     display: flex;
     align-items: center;
     flex-flow: column;
-    justify-content: center;
-    height: 100%;
-    font-family: Arial, sans-serif;
+    font-family: 'Quicksand', sans-serif;
     color: #000;
     
 }
 
-.row{
-	width: 95%;
-	
+.fa {
+	font-size:18pt;
 }
+
+
+.options-btn {
+    color: #000;
+    font-size: 30pt;
+    /*position: absolute;*/
+    text-align:left;
+    transform: rotateZ(0deg);
+    cursor: pointer;
+    transition: transform 0.3s;
+    
+    &:hover {
+      transform: rotateZ(60deg);
+    }
+}
+
+
+
+.options-active {
+    
+  }
+  
+ .options {
+    max-height: 1000px !important;
+    padding: 15px;
+    overflow: visible !important;
+    border: 2px solid gray;
+    display: none;
+    background: #FFF;
+    color: #333;
+    overflow: hidden;
+    transition: all 0.25s;
+    
+    .up {
+      color: #FFF;
+      font-size: 22px;
+      position: absolute;
+      top: -14px;
+      right: 3px;
+      z-index: 500;
+      transform: rotateZ(180deg);
+    }
+    
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+  }
+
+
+.row {
+   width: 60%;	
+}
+
+@media only screen and (max-width: 700px) {
+    .row{
+	   width: 100%;
+    }
+}
+
 
 
 .column {
@@ -45,14 +104,15 @@ body {
 }
 
 .current {
-   padding:50px;
-   background: orange;
+   padding:10px;
+   background: #ffc966;
  }
 
 .next {
-   padding:50px;
+   padding:10px;
    margin-left: 10px;
-   background: #ADD8E6;
+   background: orange;
+   
  }
  
 
@@ -109,10 +169,10 @@ body {
   background: none;
   border: none;
   outline: none;
-  width: 20px;
+  width: 30px;
   max-width: 190px;
   padding: 10px 20px;
-  border-radius: 9999px;
+  /*border-radius: 9999px;*/
   box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
   color: #fff;
   font-size:16pt;
@@ -122,7 +182,8 @@ body {
 
 #bar-changer{
    width:90%; 
-   background:DodgerBlue; 
+   /*background:DodgerBlue; */
+    background:dodgerBlue;
    text-align:center; 
    margin-bottom:10px; 
    padding:5px; 
@@ -131,6 +192,7 @@ body {
 
 #bar-changer label{	
    font-size:12pt;
+    font-weight:500;
 }
 
 #bar-changer .column2{
@@ -139,16 +201,17 @@ body {
 
 #bar-counter{
    width:90%; 
-   background:DodgerBlue; 
+   /*background:DodgerBlue; */
+   background: dodgerBlue;
    text-align:center; 
-   margin-bottom:10px; 
+   margin-bottom:0px; 
    padding:5px; 
    color:white;
 }
 
 #bar-counter #counter{
-	margin-top:10px;
-	font-size:16pt;
+	/*margin-top:10px;*/
+	font-size:22pt;
 }
 
 button {
@@ -158,7 +221,7 @@ button {
     width: 40px;
     height: 40px;
     margin: 5px;
-    background-color: dodgerblue;
+    background: dodgerBlue;
     color: #e9e9e9;
     cursor: pointer;
 }
@@ -178,6 +241,11 @@ a {
 a:hover {
     color: #356161;
 }
+
+
+
+
+
 
 .play {
     width: 0;
