@@ -60,10 +60,18 @@ const rideClefs = [[new StaveNote({ keys: ['a/5/x2'], duration: 'q'})], //1
 		   ];	     
 
 
+// Groove Scribe grooves
+const bassGS = ["&K=|o-------o-------|", "&K=|o-o-----o-o-----|"];
+const hihatGS = ["&K=|x---x---x---x---|", "&K=|x-x-x-x-x-x-x-x-|", "&K=|--x---x---x---x-|"];
+const snareGS = ["&S=|----o-------o---|"];
+const rideGS = ["&H=|r---r---r---r---|", "&H=|r-r-r-r-r-r-r-r-|", "&H=|--r---r---r---r-|", "&H=|rrrrrrrrrrrrrrrr|", "&H=|rr--rr--rr--rr--|", "&H=|--rr--rr--rr--rr|", "&H=|r--rr--rr--rr--r|", "&H=|---r---r---r---r|", "&H=|-rr--rr--rr--rr-|", "&H=|-r---r---r---r--|", "&H=|-r-r-r-r-r-r-r-r|", "&H=|r-rrr-rrr-rrr-rr|", "&H=|rrr-rrr-rrr-rrr-|", "&H=|-rrr-rrr-rrr-rrr|", "&H=|rr-rrr-rrr-rrr-r|"];
 
+
+
+// class METRONOME
 class Metronome
 {
-    constructor(tempo = 70)
+    constructor(tempo = 170)
     {
         this.audioContext = null;
         this.notesInQueue = [];    // notes that have been put into the web audio and may or may not have been played yet {note, time}
@@ -224,6 +232,8 @@ class Metronome
         }
     }
     
+    
+    
    
  
     ////////////////////////////
@@ -368,7 +378,7 @@ class Metronome
     	    while (JSON.stringify(randoms) == JSON.stringify(this.randoms) &&                        (this.played.includes(val)));
             
             this.played.push(val);
-            console.log(this.played);
+            //console.log(this.played);
     	    this.randoms = randoms;
     	}  
     	else{
@@ -387,7 +397,7 @@ class Metronome
     	   this.randoms[limb] = new_val;
            //val = JSON.stringify(this.randoms);
            this.played.push(val);
-           console.log(this.played);
+           //console.log(this.played);
     	}
     }
     
@@ -400,7 +410,11 @@ class Metronome
     	document.getElementById('rideno').innerHTML = "&nbsp;B"+(this.randoms[1]+1)+".&nbsp;";	
     	this.hihat('hihat', this.randoms[2]);
     	document.getElementById('hhno').innerHTML = "&nbsp;C"+(this.randoms[2]+1)+".&nbsp;";
-    	this.gs.AddGrooveDisplayToElementId('GrooveDisplay', "?TimeSig=4/4&Div=16&Tempo=70&Measures=1&H=|--r---r---r---r-|&S=|----o-------o---|&K=|o-X---x-o-X---x-|", true, true, false);	
+    	
+    	//Groove scribe
+    	let groove = this.createGrooveScribeGroove(this.randoms);
+    	//let groove = this.createGrooveScribeGroove([1,0,2]);
+    	this.gs.AddGrooveDisplayToElementId('GrooveDisplay', groove, true, true, false);	
     	//next
         if (this.weight == 0)
             this.generateWeightedRandoms();
@@ -418,6 +432,40 @@ class Metronome
     	document.getElementById('ridenonext').innerHTML = "&nbsp;B"+(this.randoms[1]+1)+".&nbsp;";
     	this.hihat('hihatNext', this.randoms[2]);
     	document.getElementById('hhnonext').innerHTML = "&nbsp;C"+(this.randoms[2]+1)+".&nbsp;";
+    }
+    
+    
+    ////////////////////////////
+    // Groove Scribe
+    ///////////////////////////
+    createGrooveScribeGroove(randoms){
+    	let stem = "?TimeSig=4/4&Div=16&Tempo=";
+    	stem += this.tempo;
+    	stem += "&Measures=1";
+    	stem += rideGS[randoms[1]];
+    	stem += snareGS[0];
+    	
+    	let kick = bassGS[randoms[0]];
+    	let hh = hihatGS[randoms[2]];
+    	let comb = '&K=|';
+    	for (let i = 4; i < kick.length-1; i++) {
+	  if (kick[i] != '-' && hh[i] != '-')
+	  	comb += 'X';
+	  else if (kick[i] != '-')
+	         comb += 'o';
+	  else if (hh[i] != '-')
+	         comb += 'x';
+	  else
+	  	comb += '-';
+	}   
+	comb += '|';
+    	
+    	stem += comb;
+	//console.log(stem);
+    	
+    	
+    	return stem;
+    
     }
     
     
