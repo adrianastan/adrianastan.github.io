@@ -19,10 +19,15 @@ function dotted(staveNote, noteIndex = -1) {
   return staveNote;
 }
 
+const circle1 = document.getElementById("circle1");
+const circle2 = document.getElementById("circle2");
+const circle3 = document.getElementById("circle3");
+const circle4 = document.getElementById("circle4");
+
 //bass, ride, hihat
 const weights = [[1,2],
                  [1,1,2,1,1,1,5,4,3,3,5,1,1,3,1],
-                 [1,2,3]
+                 [1,2,2]
                 ]
        
 const snareClefs = [[new StaveNote({keys: ['c/5'],duration: 'q'})]];
@@ -84,9 +89,6 @@ class Metronome
         this.clef();
     }
     
-    clefOptions(){
-    	bassclefs = []
-    }
 
     nextNote()
     {
@@ -109,7 +111,7 @@ class Metronome
         const osc = this.audioContext.createOscillator();
         const envelope = this.audioContext.createGain();
         
-        osc.frequency.value = (beatNumber % this.beatsPerBar == 0) ? 2000 : 1500;
+        osc.frequency.value = (beatNumber % this.beatsPerBar == 0) ? 3000 : 2000;
         envelope.gain.value = 1;
         envelope.gain.exponentialRampToValueAtTime(1, time + 0.001);
         envelope.gain.exponentialRampToValueAtTime(0.001, time + 0.02);
@@ -128,15 +130,50 @@ class Metronome
             this.scheduleNote(this.currentBeatInBar, this.nextNoteTime);
             this.nextNote();
             if (this.currentBeatInBar == 1){
-            	this.counter += 1;
-            	
+                circle1.style.color = "tomato";
+                circle2.style.color = "mediumseagreen";
+                circle3.style.color = "mediumseagreen";
+                circle4.style.color = "mediumseagreen";
+            }
+            if (this.currentBeatInBar == 2){
+                circle2.style.color = "tomato";
+                circle1.style.color = "mediumseagreen";
+                circle3.style.color = "mediumseagreen";
+                circle4.style.color = "mediumseagreen";
+            }
+            if (this.currentBeatInBar == 3){
+                circle3.style.color = "tomato";
+                circle1.style.color = "mediumseagreen";
+                circle2.style.color = "mediumseagreen";
+                circle4.style.color = "mediumseagreen";
+            }
+            if (this.currentBeatInBar == 0){
+                circle4.style.color = "tomato";
+                circle1.style.color = "mediumseagreen";
+                circle2.style.color = "mediumseagreen";
+                circle3.style.color = "mediumseagreen";
+                
+            }
+            
+            
+            if (this.currentBeatInBar == 1){
+                console.log(this.counter);
+                this.counter += 1;
+                if (this.counter == 0){
+            		counter.style.background = 'tomato';
+            		counter.textContent = "Count in";
+                    
+            	}
+                          	
             	if (this.counter == repeatBars){
             		counter.style.background = 'tomato';
             		counter.textContent = this.counter;
             	}
             	else{
-            		counter.style.background = 'mediumseagreen';
-            		counter.textContent = this.counter;
+                    if (this.counter > 0){
+                        counter.style.background = 'mediumseagreen';
+                        counter.textContent = this.counter;
+                        }
             	}
             	if (this.counter == repeatBars + 1){
             		counter.style.background = 'orange';
@@ -159,7 +196,7 @@ class Metronome
     start()
     {
         if (this.isRunning) return;
-	this.counter = 0;
+	    this.counter = -1;
         if (this.audioContext == null)
         {
             this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -182,6 +219,9 @@ class Metronome
     {
         if (this.isRunning) {
             this.stop();
+            this.counter = -1;
+            counter.textContent = 0;
+            counter.style.background = 'dodgerblue';
         }
         else {
             this.start(counter);
@@ -310,16 +350,15 @@ class Metronome
     	}  
     	else{
     	   /* change only one limb */
-    	   const limb = this.weightedRandom([1,2,1]);
+    	   const limb = this.weightedRandom([1,1,2]);
     	   var new_val = this.weightedRandom(weights[limb]);
     	   
             while (new_val == this.randoms[limb]){
-    	   	new_val = this.weightedRandom(weights[limb]);
+    	   	   new_val = this.weightedRandom(weights[limb]);
     	   }
     	   this.randoms[limb] = new_val;
     	}
     }
-    
     
     
     generateRandoms(){
