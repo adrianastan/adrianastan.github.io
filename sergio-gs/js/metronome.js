@@ -400,7 +400,7 @@ class Metronome
     	document.getElementById('rideno').innerHTML = "&nbsp;B"+(this.randoms[1]+1)+".&nbsp;";	
     	this.hihat('hihat', this.randoms[2]);
     	document.getElementById('hhno').innerHTML = "&nbsp;C"+(this.randoms[2]+1)+".&nbsp;";
-    	this.gs.AddGrooveDisplayToElementId('GrooveDisplay', "?TimeSig=4/4&Div=16&Tempo=70&Measures=1&H=|--r---r---r---r-|&S=|----o-------o---|&K=|o-X---x-o-X---x-|", true, true, true);	
+    	this.gs.AddGrooveDisplayToElementId('GrooveDisplay', "?TimeSig=4/4&Div=16&Tempo=70&Measures=1&H=|--r---r---r---r-|&S=|----o-------o---|&K=|o-X---x-o-X---x-|", true, true, false);	
     	//next
         if (this.weight == 0)
             this.generateWeightedRandoms();
