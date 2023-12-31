@@ -158,7 +158,7 @@ class GrooveDisplay{
 				var svgReturn = myGrooveUtils.renderABCtoSVG(abcNotation);
 
 				if (linkToEditor)
-					svgTarget.innerHTML = '<a style="text-decoration: none" href="http://mikeslessons.com/gscribe/' + GrooveDefinition + '">' + svgReturn.svg + '</a>';
+					svgTarget.innerHTML = '<a style="text-decoration: none" href="http://mikeslessons.com/gscribe/' + GrooveDefinition + '" target="_blank">' + svgReturn.svg + '</a>';
 				else
 					svgTarget.innerHTML = svgReturn.svg;
 			};
