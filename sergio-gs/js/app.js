@@ -46,6 +46,7 @@ var tempoChangeButtons = document.getElementsByClassName('tempo-change');
 for (var i = 0; i < tempoChangeButtons.length; i++) {
     tempoChangeButtons[i].addEventListener('click', function() {
         metronome.tempo += parseInt(this.dataset.change);
+        metronome.clefTempoUpdate();
         tempo.textContent = metronome.tempo;
     });
 }
