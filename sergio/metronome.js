@@ -1,3 +1,8 @@
+const circle1 = document.getElementById("circle1");
+const circle2 = document.getElementById("circle2");
+const circle3 = document.getElementById("circle3");
+const circle4 = document.getElementById("circle4");
+
 const {Renderer,
        Stave,
        StaveNote,
@@ -19,17 +24,14 @@ function dotted(staveNote, noteIndex = -1) {
   return staveNote;
 }
 
-const circle1 = document.getElementById("circle1");
-const circle2 = document.getElementById("circle2");
-const circle3 = document.getElementById("circle3");
-const circle4 = document.getElementById("circle4");
-
 //bass, ride, hihat
 const weights = [[1,2],
                  [1,1,2,1,1,1,5,4,3,3,5,1,1,3,1],
-                 [1,2,2]
-                ]
+                 [1,2,2]];
+
+const limbWeights = [1,1,2];
        
+// scores
 const snareClefs = [[new StaveNote({keys: ['c/5'],duration: 'q'})]];
 const bassClefs = [[new StaveNote({keys: ['f/4'],duration: 'q'})],
 		   [new StaveNote({keys: ['f/4'],duration: '8'}), new StaveNote({keys: ['f/4'],duration: '8'})]
@@ -61,10 +63,10 @@ const rideClefs = [[new StaveNote({ keys: ['a/5/x2'], duration: 'q'})], //1
 
 class Metronome
 {
-    constructor(tempo = 70)
+    constructor(tempo = 170)
     {
         this.audioContext = null;
-        this.notesInQueue = [];         // notes that have been put into the web audio and may or may not have been played yet {note, time}
+        this.notesInQueue = [];    // notes that have been put into the web audio and may or may not have been played yet {note, time}
         this.currentBeatInBar = 0;
         this.beatsPerBar = 4;
         this.tempo = tempo;
@@ -77,15 +79,18 @@ class Metronome
         this.rideRand = Math.floor(Math.random() * 8);
     	this.bassRand = Math.floor(Math.random() * 2);
     	this.hihatRand = Math.floor(Math.random() * 3);
+        
     	// bass, ride, hihat
     	this.lengths = [bassClefs.length, rideClefs.length, hihatClefs.length]
     	this.randoms = [Math.floor(Math.random() * this.lengths[0]),
-    			Math.floor(Math.random() * this.lengths[1]),
-    			Math.floor(Math.random() * this.lengths[2])];
+                        Math.floor(Math.random() * this.lengths[1]),
+                        Math.floor(Math.random() * this.lengths[2])];
     	
     	this.repeatBars = 4;//document.getElementById('maxRepeat').value;
     	this.change = 0;
         this.weight = 0;
+        this.played = [];
+        this.max_combinations = bassClefs.length * rideClefs.length * hihatClefs.length;
         this.clef();
     }
     
@@ -129,52 +134,45 @@ class Metronome
         while (this.nextNoteTime < this.audioContext.currentTime + this.scheduleAheadTime ) {
             this.scheduleNote(this.currentBeatInBar, this.nextNoteTime);
             this.nextNote();
-            if (this.currentBeatInBar == 1){
-                circle1.style.color = "tomato";
-                circle2.style.color = "mediumseagreen";
-                circle3.style.color = "mediumseagreen";
-                circle4.style.color = "mediumseagreen";
-            }
-            if (this.currentBeatInBar == 2){
-                circle2.style.color = "tomato";
-                circle1.style.color = "mediumseagreen";
-                circle3.style.color = "mediumseagreen";
-                circle4.style.color = "mediumseagreen";
-            }
-            if (this.currentBeatInBar == 3){
-                circle3.style.color = "tomato";
-                circle1.style.color = "mediumseagreen";
-                circle2.style.color = "mediumseagreen";
-                circle4.style.color = "mediumseagreen";
-            }
-            if (this.currentBeatInBar == 0){
-                circle4.style.color = "tomato";
-                circle1.style.color = "mediumseagreen";
-                circle2.style.color = "mediumseagreen";
-                circle3.style.color = "mediumseagreen";
-                
+            
+            //Reset circles
+            circle1.style.color = "mediumseagreen";
+            circle2.style.color = "mediumseagreen";
+            circle3.style.color = "mediumseagreen";
+            circle4.style.color = "mediumseagreen";
+            switch(this.currentBeatInBar) {
+                case 1:
+                    circle1.style.color = "tomato";
+                    break; 
+                case 2:
+                    circle2.style.color = "tomato";
+                    break;
+                case 3:
+                    circle3.style.color = "tomato";
+                    break;
+                case 0:
+                    circle4.style.color = "tomato";
+                    break;     
             }
             
             
             if (this.currentBeatInBar == 1){
-                console.log(this.counter);
+                //console.log(this.counter);
                 this.counter += 1;
                 if (this.counter == 0){
             		counter.style.background = 'tomato';
-            		counter.textContent = "Count in";
-                    
+            		counter.textContent = "Count in";  
             	}
                           	
             	if (this.counter == repeatBars){
             		counter.style.background = 'tomato';
             		counter.textContent = this.counter;
             	}
-            	else{
-                    if (this.counter > 0){
+            	else if (this.counter > 0){
                         counter.style.background = 'mediumseagreen';
                         counter.textContent = this.counter;
-                        }
-            	}
+                }
+            	
             	if (this.counter == repeatBars + 1){
             		counter.style.background = 'orange';
             		counter.textContent = "FILL";
@@ -184,6 +182,7 @@ class Metronome
             		this.counter = 1;
             		counter.textContent = this.counter;
             	}
+                
                 if (this.counter > repeatBars + 2){
                     this.counter = 1;
             		counter.textContent = this.counter;
@@ -193,30 +192,26 @@ class Metronome
         }
     }
 
-    start()
-    {
+    start(){
         if (this.isRunning) return;
+        this.played = [];
 	    this.counter = -1;
-        if (this.audioContext == null)
-        {
+        if (this.audioContext == null){
             this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
         }
         this.isRunning = true;
         this.currentBeatInBar = 0;
         this.nextNoteTime = this.audioContext.currentTime + 0.05;
-        this.intervalID = setInterval(() => this.scheduler(counter, this.repeatBars), this.lookahead);
-        
+        this.intervalID = setInterval(() => this.scheduler(counter, this.repeatBars), this.lookahead);      
     }
 
 
-    stop()
-    {
+    stop(){
         this.isRunning = false;
         clearInterval(this.intervalID);
     }
 
-    startStop(counter)
-    {
+    startStop(counter){
         if (this.isRunning) {
             this.stop();
             this.counter = -1;
@@ -231,7 +226,7 @@ class Metronome
    
  
     ////////////////////////////
-    // CLEF
+    // MUSIC SCORE
     ///////////////////////////
     bass(elementid, rand){
         document.getElementById(elementid).innerHTML = '';
@@ -302,8 +297,7 @@ class Metronome
     }
     
     
-    weightedRandom(weights) {
-      
+    weightedRandom(weights) { 
       // Preparing the cumulative weights array.
       // For example:
       // - weights = [1, 4, 3]
@@ -317,9 +311,6 @@ class Metronome
       // - weights = [1, 4, 3]
       // - maxCumulativeWeight = 8
       // - range for the random number is [0...8]
-        
-        
-        
       const maxCumulativeWeight = cumulativeWeights[cumulativeWeights.length - 1];
       const randomNumber = maxCumulativeWeight * Math.random();
       // Picking the random item based on its weight.
@@ -331,68 +322,76 @@ class Metronome
       }
     }
     
-    
+    /* 
+        GENERATE WEIGHTED RANDOMS 
+    */
     generateWeightedRandoms(){
-        //console.log("change value: "+this.change);
         
     	if (this.change != 0){
-    	    /* can change any, but at least one */
-    	    var randoms = [this.weightedRandom(weights[0]),
-    			           this.weightedRandom(weights[1]),
-    			           this.weightedRandom(weights[2])];
-    	    while ((randoms[0]==this.randoms[0]) && (randoms[1]==this.randoms[1]) && (randoms[2]==this.randoms[2])){
+    	    /* Can change any, but at least one */
+    	    var randoms = [];
+    	    do{
     	        randoms = [this.weightedRandom(weights[0]),
     			           this.weightedRandom(weights[1]),
     			           this.weightedRandom(weights[2])];
-    	    }
+    	    } while (JSON.stringify(randoms) == JSON.stringify(this.randoms));
     	    this.randoms = randoms;
-   	
     	}  
     	else{
-    	   /* change only one limb */
-    	   const limb = this.weightedRandom([1,1,2]);
-    	   var new_val = this.weightedRandom(weights[limb]);
-    	   
-            while (new_val == this.randoms[limb]){
-    	   	   new_val = this.weightedRandom(weights[limb]);
-    	   }
+    	   /* Change only one limb */
+            let limb = 0;
+            let new_val = 0;
+            do {
+    	       limb = this.weightedRandom(limbWeights);
+    	       new_val = this.weightedRandom(weights[limb]);
+            } while (new_val == this.randoms[limb]);
     	   this.randoms[limb] = new_val;
     	}
     }
     
-    
+    /* -----------------
+        GENERATE RANDOMS 
+     ------------------- */
     generateRandoms(){
-        //console.log("change value: "+this.change);
     	if (this.change != 0){
     	    /* can change any, but at least one */
-    	    var randoms = [Math.floor(Math.random() * this.lengths[0]),
-    			Math.floor(Math.random() * this.lengths[1]),
-    			Math.floor(Math.random() * this.lengths[2])];
-    	    while ((randoms[0]==this.randoms[0]) && (randoms[1]==this.randoms[1]) && (randoms[2]==this.randoms[2])){
-    	        randoms = [Math.floor(Math.random() * this.lengths[0]),
-    			Math.floor(Math.random() * this.lengths[1]),
-    			Math.floor(Math.random() * this.lengths[2])];
-    	    }
-    	    /*this.randoms[0] = randoms[0];
-    	    this.randoms[1] = randoms[1];
-    	    this.randoms[2] = randoms[2];*/
+    	    let randoms = [];  
+            let val ="";
+            
+            do{
+               randoms = [Math.floor(Math.random() * this.lengths[0]),
+                    Math.floor(Math.random() * this.lengths[1]),
+                    Math.floor(Math.random() * this.lengths[2])]; 
+                val = JSON.stringify(randoms);
+            }
+    	    while (JSON.stringify(randoms) == JSON.stringify(this.randoms) &&                        (this.played.includes(val)));
+            
+            this.played.push(val);
+            console.log(this.played);
     	    this.randoms = randoms;
-    	
     	}  
     	else{
     	   /* change only one limb */
-    	   const limb = Math.floor(Math.random() * 3);
-    	   var new_val = Math.floor(Math.random() * this.lengths[limb]);
-    	   while (new_val == this.randoms[limb]){
-    	   	new_val = Math.floor(Math.random() * this.lengths[limb]);
-    	   }
+           let limb = 0;
+           let new_val = 0;
+           let val = '';
+           do{ 
+               limb = Math.floor(Math.random() * 3);
+    	       new_val = Math.floor(Math.random() * this.lengths[limb]);
+               let clonedRandoms = JSON.parse(JSON.stringify(this.randoms))
+               clonedRandoms[limb] = new_val;
+               val = JSON.stringify(clonedRandoms);
+           } while (new_val == this.randoms[limb] && this.played.includes(val));
+           
     	   this.randoms[limb] = new_val;
+           //val = JSON.stringify(this.randoms);
+           this.played.push(val);
+           console.log(this.played);
     	}
     }
     
     
-    clef()
-    {
+    clef(){
     	//current
         this.bass('bassSnare', this.randoms[0]);
         document.getElementById('bassno').innerHTML = "&nbsp;A"+(this.randoms[0]+1)+".&nbsp;";
@@ -407,7 +406,11 @@ class Metronome
         else
     	   this.generateRandoms();
         
-   	    	
+   	    if (this.played.length == this.max_combinations){
+            this.played = [];
+            this.played.length = 0;  
+        }	
+        
     	this.bass('bassSnareNext', this.randoms[0]);
     	document.getElementById('bassnonext').innerHTML = "&nbsp;A"+(this.randoms[0]+1)+".&nbsp;";
     	this.ride('rideNext', this.randoms[1]);
