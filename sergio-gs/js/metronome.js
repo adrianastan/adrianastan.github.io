@@ -368,17 +368,17 @@ class Metronome
     	    /* can change any, but at least one */
     	    let randoms = [];  
             let val ="";
-            
+            let attempts = 0;
             do{
                randoms = [Math.floor(Math.random() * this.lengths[0]),
                     Math.floor(Math.random() * this.lengths[1]),
                     Math.floor(Math.random() * this.lengths[2])]; 
                 val = JSON.stringify(randoms);
+                attempts+=1;
             }
-    	    while (JSON.stringify(randoms) == JSON.stringify(this.randoms) &&                        (this.played.includes(val)));
+    	    while (((JSON.stringify(randoms) == JSON.stringify(this.randoms)) ||                        this.played.includes(val)) && attempts < 20 );
             
             this.played.push(val);
-            //console.log(this.played);
     	    this.randoms = randoms;
     	}  
     	else{
@@ -386,17 +386,21 @@ class Metronome
            let limb = 0;
            let new_val = 0;
            let val = '';
+           let attempts = 0; //number of random selections so as not to block the app
            do{ 
                limb = Math.floor(Math.random() * 3);
     	       new_val = Math.floor(Math.random() * this.lengths[limb]);
                let clonedRandoms = JSON.parse(JSON.stringify(this.randoms))
                clonedRandoms[limb] = new_val;
                val = JSON.stringify(clonedRandoms);
-           } while (new_val == this.randoms[limb] && this.played.includes(val));
+               attempts+=1;
+               console.log(val, this.played.includes(val));
+           } while ((new_val == this.randoms[limb] || this.played.includes(val)) && (attempts<20));
            
     	   this.randoms[limb] = new_val;
            //val = JSON.stringify(this.randoms);
-           this.played.push(val);
+            if (!this.played.includes(val))
+                    this.played.push(val);
            //console.log(this.played);
     	}
     }
@@ -439,10 +443,12 @@ class Metronome
         else
     	   this.generateRandoms();
         
-   	if (this.played.length == this.max_combinations){
-		    this.played = [];
-		    this.played.length = 0;  
-        }	
+        console.log(this.played);
+        console.log(this.max_combinations, this.played.length)
+        if (this.played.length == this.max_combinations){
+                this.played = [];
+                this.played.length = 0;  
+            }	
         
     	this.bass('bassSnareNext', this.randoms[0]);
     	document.getElementById('bassnonext').innerHTML = "&nbsp;A"+(this.randoms[0]+1)+".&nbsp;";
