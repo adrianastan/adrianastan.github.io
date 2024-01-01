@@ -394,7 +394,7 @@ class Metronome
                clonedRandoms[limb] = new_val;
                val = JSON.stringify(clonedRandoms);
                attempts+=1;
-               console.log(val, this.played.includes(val));
+               //console.log(val, this.played.includes(val));
            } while ((new_val == this.randoms[limb] || this.played.includes(val)) && (attempts<20));
            
     	   this.randoms[limb] = new_val;
@@ -443,8 +443,8 @@ class Metronome
         else
     	   this.generateRandoms();
         
-        console.log(this.played);
-        console.log(this.max_combinations, this.played.length)
+        //console.log(this.played);
+        //console.log(this.max_combinations, this.played.length)
         if (this.played.length == this.max_combinations){
                 this.played = [];
                 this.played.length = 0;  
