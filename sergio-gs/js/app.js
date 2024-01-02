@@ -1,10 +1,6 @@
-// event = keyup or keydown
 //https://github.com/grantjames/metronome/blob/master/README.md
+
 var counter = document.getElementById('counter');
-
-
-
-
 var metronome = new Metronome();
 
 document.addEventListener('keyup', event => {
@@ -25,10 +21,6 @@ var tempo = document.getElementById('tempo');
 tempo.textContent = metronome.tempo;
 
 var playPauseIcon = document.getElementById('play-pause-icon');
-
-
-
-
 var playButton = document.getElementById('play-button');
 playButton.addEventListener('click', function() {
     metronome.startStop(counter);
@@ -60,9 +52,7 @@ repeatBars.addEventListener('input', function() {
     }
     else{
         metronome.repeatBars = 4;
-        //console.log("Resetting repeat to 4");
     }
-    //console.log("Repeat bars:"+repeatBars.value);
 });
 
 
@@ -70,45 +60,36 @@ repeatBars.addEventListener('input', function() {
 
 
 var radioButtons = document.getElementsByName("changer");
-    // Loop through the radio buttons to find the selected one
 for (var i = 0; i < radioButtons.length; i++) {
-if (radioButtons[i].checked) {
-    // Display the value of the selected radio button
-    metronome.change = radioButtons[i].value;
-}
+    if (radioButtons[i].checked) {
+        metronome.change = radioButtons[i].value;
+    }
 }
 
 document.forms["changerForm"].addEventListener("change", function() {
     var radioButtons = document.getElementsByName("changer");
-    // Loop through the radio buttons to find the selected one
     for (var i = 0; i < radioButtons.length; i++) {
-      if (radioButtons[i].checked) {
-        // Display the value of the selected radio button
-        //console.log("Change value: "+radioButtons[i].value);
-        metronome.change = radioButtons[i].value;
-        return;
-      }
-    }
+          if (radioButtons[i].checked) {
+            metronome.change = radioButtons[i].value;
+            return;
+          }
+        }
 });
 
 
 
 var radioButtons = document.getElementsByName("weighter");
-    // Loop through the radio buttons to find the selected one
     for (var i = 0; i < radioButtons.length; i++) {
-    if (radioButtons[i].checked) {
-        // Display the value of the selected radio button
-        metronome.weight = radioButtons[i].value;
-    }
+        if (radioButtons[i].checked) {
+            // Display the value of the selected radio button
+            metronome.weight = radioButtons[i].value;
+        }
 }
 
 document.forms["weighterForm"].addEventListener("change", function() {
     var radioButtons = document.getElementsByName("weighter");
-    // Loop through the radio buttons to find the selected one
     for (var i = 0; i < radioButtons.length; i++) {
       if (radioButtons[i].checked) {
-        // Display the value of the selected radio button
-        //console.log("Weight value: "+radioButtons[i].value);
         metronome.weight = radioButtons[i].value;
         return;
       }
@@ -119,11 +100,9 @@ document.forms["weighterForm"].addEventListener("change", function() {
 
 function toggleSettings() {
   var settingsDiv = document.getElementById("options");
-
   // Toggle the visibility of the settings div
   if (settingsDiv.style.display === "none") {
     settingsDiv.style.display = "block";
-    //console.log("switch to block");
   } else {
     settingsDiv.style.display = "none";
   }
@@ -132,9 +111,7 @@ function toggleSettings() {
 var options = document.getElementById("options-btn");
 options.addEventListener('click', function() {
 	toggleSettings()
-	//console.log("options active");
 });
-
 
 
 /*

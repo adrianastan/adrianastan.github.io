@@ -100,7 +100,9 @@ const rideGS  = ["&H=|r---r---r---r---|", "&H=|r-r-r-r-r-r-r-r-|", "&H=|--r---r-
                  "&H=|-r---r---r---r--|", "&H=|-r-r-r-r-r-r-r-r|", "&H=|r-rrr-rrr-rrr-rr|", 
                  "&H=|rrr-rrr-rrr-rrr-|", "&H=|-rrr-rrr-rrr-rrr|", "&H=|rr-rrr-rrr-rrr-r|"];
 
-// class METRONOME
+/* ----------------
+   Class METRONOME
+   ---------------- */
 class Metronome
 {
     constructor(tempo = 70)
@@ -176,16 +178,16 @@ class Metronome
             circle4.style.color = "mediumseagreen";
             switch(this.currentBeatInBar) {
                 case 1:
-                    circle1.style.color = "tomato";
+                    circle1.style.color = "#ec6a52";
                     break; 
                 case 2:
-                    circle2.style.color = "tomato";
+                    circle2.style.color = "#ec6a52";
                     break;
                 case 3:
-                    circle3.style.color = "tomato";
+                    circle3.style.color = "#ec6a52";
                     break;
                 case 0:
-                    circle4.style.color = "tomato";
+                    circle4.style.color = "#ec6a52";
                     break;     
             }
             
@@ -194,12 +196,12 @@ class Metronome
                 //console.log(this.counter);
                 this.counter += 1;
                 if (this.counter == 0){
-                    counter.style.background = 'tomato';
+                    counter.style.background = '#064786';
                     counter.textContent = "Count in";  
                 }
                               
                 if (this.counter == repeatBars){
-                    counter.style.background = 'tomato';
+                    counter.style.background = '#ec6a52';
                     counter.textContent = this.counter;
                 }
                 else if (this.counter > 0){
@@ -257,13 +259,11 @@ class Metronome
         }
     }
     
-    
-    
-   
  
-    ////////////////////////////
-    // MUSIC SCORE
-    ///////////////////////////
+    /* -----------------
+       MUSIC SCORE
+       ----------------- */
+    // kick
     bass(elementid, rand){
         document.getElementById(elementid).innerHTML = '';
         const div = document.getElementById(elementid);
@@ -279,15 +279,13 @@ class Metronome
         const allnotes = notes1.concat(notes2);
         const beams = Beam.generateBeams(allnotes);
         Formatter.FormatAndDraw(context, stave, allnotes);
-
-        // Draw the beams and stems.
         beams.forEach((b) => {
           b.setContext(context).draw();
         });
     }
     
     
-    //ride
+    // ride
     ride(elementid, rand){
         document.getElementById(elementid).innerHTML = '';
         const div = document.getElementById(elementid);
@@ -296,21 +294,18 @@ class Metronome
         const context = renderer.getContext();
         const stave = new Stave(0, 0, 200);
         stave.addClef('percussion').addTimeSignature('1/4');
-        // Connect it to the rendering context and draw!
         stave.setContext(context).draw();
 
         // Create the notes
         const notes1 = rideClefs[rand];
         const beams = Beam.generateBeams(notes1);
         Formatter.FormatAndDraw(context, stave, notes1);
-
-        // Draw the beams and stems.
         beams.forEach((b) => {
           b.setContext(context).draw();
         });
     }
     
-    /* hihat */
+    // hihat 
     hihat(elementid, rand){
         document.getElementById(elementid).innerHTML = '';
         const div = document.getElementById(elementid);
@@ -324,9 +319,7 @@ class Metronome
         // Create the notes
         const notes1 = hihatClefs[rand];
         const beams = Beam.generateBeams(notes1);
-
         Formatter.FormatAndDraw(context, stave, notes1);
-        // Draw the beams and stems.
         beams.forEach((b) => {
           b.setContext(context).draw();
         });
@@ -334,7 +327,9 @@ class Metronome
     
     
     
-    
+    /* -------------------------
+       Weighted Randoms function 
+       ------------------------- */
     weightedRandom(weights) { 
       // Preparing the cumulative weights array.
       // For example:
@@ -360,18 +355,17 @@ class Metronome
       }
     }
     
-    /* 
-        GENERATE WEIGHTED RANDOMS 
-    */
+    /* -------------------------
+       GENERATE WEIGHTED RANDOMS 
+       ------------------------- */
     generateWeightedRandoms(){
-        
         if (this.change != 0){
             /* Can change any, but at least one */
             var randoms = [];
             do{
                 randoms = [this.weightedRandom(weights[0]),
-                   this.weightedRandom(weights[1]),
-                   this.weightedRandom(weights[2])];
+                           this.weightedRandom(weights[1]),
+                           this.weightedRandom(weights[2])];
             } while (JSON.stringify(randoms) == JSON.stringify(this.randoms));
             this.randoms = randoms;
         }  
@@ -389,7 +383,7 @@ class Metronome
     
     /* -----------------
         GENERATE RANDOMS 
-     ------------------- */
+       ------------------- */
     generateRandoms(){
         if (this.change != 0){
             /* can change any, at least one */
@@ -398,19 +392,19 @@ class Metronome
             let attempts = 0;
             do{
                randoms = [Math.floor(Math.random() * this.lengths[0]),
-                    Math.floor(Math.random() * this.lengths[1]),
-                    Math.floor(Math.random() * this.lengths[2])]; 
-                val = JSON.stringify(randoms);
-                attempts+=1;
+                          Math.floor(Math.random() * this.lengths[1]),
+                          Math.floor(Math.random() * this.lengths[2])]; 
+               val = JSON.stringify(randoms);
+               attempts+=1;
             }
             while (((JSON.stringify(randoms) == JSON.stringify(this.randoms)) || 
-                    this.played.includes(val)) && attempts < 20 );
+                     this.played.includes(val)) && attempts < 20 );
             
             this.played.push(val);
             this.randoms = randoms;
         }  
         else{
-           /* change only one limb */
+           /* Change only one limb */
            let limb = 0;
            let new_val = 0;
            let val = '';
@@ -427,11 +421,16 @@ class Metronome
            
            this.randoms[limb] = new_val;
            if (!this.played.includes(val))
-                    this.played.push(val);
+                this.played.push(val);
          }
     }
     
+    
+ 
 
+    /* -----------------
+        Tempo update 
+       ----------------- */
     clefTempoUpdate(){
         /* when you change the tempo, update the GS score */
         //current
@@ -449,7 +448,9 @@ class Metronome
     }
     
     
-    
+    /* ------------------------
+       Generate exercise scores
+       ------------------------ */
     clef(){
         /* draw the current and next exercises */
         /* when reached max_combinations reset the played array */
@@ -487,11 +488,11 @@ class Metronome
     }
     
     
-    ////////////////////////////
-    // Groove Scribe
-    ///////////////////////////
+    /* -------------------------
+       Groove Scribe URL creator
+       ------------------------- */
     createGrooveScribeGroove(randoms){
-        /* build the GS URL */
+        // build the GS URL
         let stem = "?TimeSig=4/4&Div=16&Tempo=";
         stem += this.tempo;
         stem += "&Measures=1";
@@ -501,7 +502,7 @@ class Metronome
         let kick = bassGS[randoms[0]];
         let hh = hihatGS[randoms[2]];
         let comb = '&K=|';
-        /* combine kick and hihat foot for GS */
+        // combine kick and hihat foot for GS 
         for (let i = 4; i < kick.length-1; i++) {
           if (kick[i] != '-' && hh[i] != '-')
               comb += 'X';
@@ -514,7 +515,6 @@ class Metronome
         }   
         comb += '|';
         stem += comb;
-        //console.log(stem);
         return stem;
     
     }
