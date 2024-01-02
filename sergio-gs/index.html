@@ -23,15 +23,15 @@
     </div>
     
     
-    <!-- SETTINGS WHEEL -->
+    <!-- SETTINGS WHEEL 
     <div class="row" style="margin-bottom:0px; width:60%;text-align:left">
     	<i class="fa fa-cog options-btn" id="options-btn" style="font-size:60px; color:orange; padding:5px"></i>
-    </div>
+    </div>-->
     	
     <!-- BAR COUNTER -->
     <div class="row" id="bar-counter" style="margin-bottom:0px; padding-top:15px;width:60%; ">
-    	<div class="column" style="width:20%">
-    	     <h4 style="margin-top:25px;font-size:24px">BAR</h4>
+    	<div class="column" style="width:20%; text-align:left;">
+    	     <h4 style="margin-top:15px;font-size:32px"><i class="fa fa-cog options-btn" id="options-btn" style="font-size:40px; color:#064786; padding:5px; "></i> BAR</h4>
     	</div>
     	<div class="column2" style="width:60%">
     		<div id="counter" style="padding:20px">0</div>
@@ -41,7 +41,7 @@
  	       <br/> <span>Repeat</span>
  	    </div>
     </div>
-    <div class="row" style="text-align:center; color:mediumseagreen; font-size:14pt">
+    <div class="row" style="text-align:center; color:mediumseagreen; font-size:18pt; background:#064786">
         <i class="fas fa-square" id="circle1"></i>
         <i class="fas fa-square" id="circle2"></i>
         <i class="fas fa-square" id="circle3"></i>
@@ -60,12 +60,12 @@
                         <br/>
                        </div>
                        <div class="column2" style="width:10%"> 
-                          <input type="radio" id="change1" name="changer" value="0" checked>
-                          <label for="change1" style="font-size:10pt; w">One </label><br>
+                          <input type="radio" id="change1" name="changer" value="0" checked><br>
+                          <label for="change1" style="font-size:10pt; w">One </label>
                        </div>
                        <div class="column2" style="width:10%">
-                          <input type="radio" id="change2" name="changer" value="1" >
-                          <label  style="font-size:10pt" for="change1">Any</label><br>
+                          <input type="radio" id="change2" name="changer" value="1" ><br>
+                          <label  style="font-size:10pt" for="change1">Any</label>
                        </div>
                        <div class="column2" style="width:50%">
                           <span style="font-size:10pt; text-align:left; color:gray; font-weight:200;">number of bars that change from one exercise to the next: one - only one slot; any - at least one, three at max.</span>
@@ -78,12 +78,12 @@
                 <form name="weighterForm">
                     <div class="column" style="text-align:right;padding-top:10px; width:20%"><b>Weighted</b><br/></div>
                     <div class="column2" style="width:10%">
-                          <input type="radio" id="weight2" name="weighter" value="1" checked>
-                          <label style="font-size:10pt" for="weight2">No</label><br> 
+                          <input type="radio" id="weight2" name="weighter" value="1" checked><br>
+                          <label style="font-size:10pt" for="weight2">No</label>
                     </div>
                     <div class="column2" style="width:10%">
-                          <input type="radio" id="weight1" name="weighter" value="0">
-                          <label for="weight1" style="font-size:10pt">Yes</label><br>
+                          <input type="radio" id="weight1" name="weighter" value="0"><br>
+                          <label for="weight1" style="font-size:10pt">Yes</label>
                     </div>
 
                     <div class="column2" style="width:50%">
@@ -161,12 +161,16 @@
     
     
     <!-- Groove display -->
-    <div class="row groove-display" id="gs" style="border: 1px solid gray; width: 50%;">
+    
+    <div class="row groove-display" id="gs" style="border: 0.5px solid #ffc966; width: 50%; padding:20px; background:cornsilk;">
     	<h2>Listen to the current bar with <a href="https://www.mikeslessons.com/groove/" target="_blank" style="color:dodgerblue">Groove Scribe</a></h2>
     	    <div id="GrooveDisplay"  >
 	    </div>
     </div>   
 
+    <footer>
+    
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.2/build/cjs/vexflow.js"></script>
     <script src="js/metronome.js"></script>
