@@ -124,7 +124,7 @@ class Metronome
         this.randoms = [Math.floor(Math.random() * this.lengths[0]),
                         Math.floor(Math.random() * this.lengths[1]),
                         Math.floor(Math.random() * this.lengths[2])];
-        
+        this.played_counter = document.getElementById('played-counter');
         this.repeatBars = 4; //document.getElementById('maxRepeat').value;
         this.change = 0;   // how many bars to change from one exercise to the next one
         this.weight = 0;   // use weighted random selection
@@ -231,6 +231,7 @@ class Metronome
     start(){
         if (this.isRunning) return;
         this.played = [];
+        this.played_counter.textContent = "Played " + this.played.length+ " out of "+this.max_combinations+" combinations";
         this.counter = -1;
         if (this.audioContext == null){
             this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -477,6 +478,7 @@ class Metronome
         else
            this.generateRandoms();
         
+        this.played_counter.textContent = "Played " + this.played.length+ " out of "+this.max_combinations+" combinations";
         //console.log(this.played);
         //console.log(this.max_combinations, this.played.length)
         this.bass('bassSnareNext', this.randoms[0]);
