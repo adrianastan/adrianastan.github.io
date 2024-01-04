@@ -4,6 +4,8 @@
 */
 
 
+
+
 var circle1 = document.getElementById("circle1");
 var circle2 = document.getElementById("circle2");
 var circle3 = document.getElementById("circle3");
@@ -124,6 +126,7 @@ class Metronome
         this.randoms = [Math.floor(Math.random() * this.lengths[0]),
                         Math.floor(Math.random() * this.lengths[1]),
                         Math.floor(Math.random() * this.lengths[2])];
+        this.previous_randoms = JSON.parse(JSON.stringify(this.randoms));
         this.played_counter = document.getElementById('played-counter');
         this.repeatBars = 4; //document.getElementById('maxRepeat').value;
         this.change = 0;   // how many bars to change from one exercise to the next one
@@ -230,8 +233,8 @@ class Metronome
 
     start(){
         if (this.isRunning) return;
-        this.played = [];
-        this.played_counter.textContent = "Played " + this.played.length+ " out of "+this.max_combinations+" combinations";
+        //this.played = [];
+        //this.played_counter.textContent = "Played " + this.played.length+ " out of "+this.max_combinations+" combinations";
         this.counter = -1;
         if (this.audioContext == null){
             this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -363,6 +366,7 @@ class Metronome
         if (this.change != 0){
             /* Can change any, but at least one */
             var randoms = [];
+            this.previous_randoms = JSON.parse(JSON.stringify(this.randoms));
             do{
                 randoms = [this.weightedRandom(weights[0]),
                            this.weightedRandom(weights[1]),
@@ -374,6 +378,7 @@ class Metronome
            /* Change only one limb */
             let limb = 0;
             let new_val = 0;
+            this.previous_randoms = JSON.parse(JSON.stringify(this.randoms));
             do {
                limb = this.weightedRandom(limbWeights);
                new_val = this.weightedRandom(weights[limb]);
@@ -391,6 +396,7 @@ class Metronome
             let randoms = [];  
             let val ="";
             let attempts = 0;
+            this.previous_randoms = JSON.parse(JSON.stringify(this.randoms));
             do{
                randoms = [Math.floor(Math.random() * this.lengths[0]),
                           Math.floor(Math.random() * this.lengths[1]),
@@ -410,6 +416,7 @@ class Metronome
            let new_val = 0;
            let val = '';
            let attempts = 0; //number of random selections so as not to block the app
+           this.previous_randoms = JSON.parse(JSON.stringify(this.randoms));
            do{ 
                limb = Math.floor(Math.random() * 3);
                new_val = Math.floor(Math.random() * this.lengths[limb]);
@@ -433,18 +440,18 @@ class Metronome
         Tempo update 
        ----------------- */
     clefTempoUpdate(){
-        /* when you change the tempo, update the GS score */
+        /* when you change the tempo, update the GS score 
         //current
-        this.bass('bassSnare', this.randoms[0]);
-        document.getElementById('bassno').innerHTML = "&nbsp;A"+(this.randoms[0]+1)+".&nbsp;";
-        this.ride('ride', this.randoms[1]);
-        document.getElementById('rideno').innerHTML = "&nbsp;B"+(this.randoms[1]+1)+".&nbsp;";    
+        this.bass('bassSnare', this.previous_randoms[0]);
+        document.getElementById('bassno').innerHTML = "&nbsp;A"+(this._previous_randoms[0]+1)+".&nbsp;";
+        this.ride('ride', this.previous_randoms[1]);
+        document.getElementById('rideno').innerHTML = "&nbsp;B"+(this.previous_randoms[1]+1)+".&nbsp;";    
 
-        this.hihat('hihat', this.randoms[2]);
-        document.getElementById('hhno').innerHTML = "&nbsp;C"+(this.randoms[2]+1)+".&nbsp;";
-        
+        this.hihat('hihat', this.previous_randoms[2]);
+        document.getElementById('hhno').innerHTML = "&nbsp;C"+(this.previous_randoms[2]+1)+".&nbsp;";
+        */
         //Groove scribe
-        let groove = this.createGrooveScribeGroove(this.randoms);
+        let groove = this.createGrooveScribeGroove(this.previous_randoms);
         this.gs.AddGrooveDisplayToElementId('GrooveDisplay', groove, true, true, false);
     }
     
@@ -459,7 +466,7 @@ class Metronome
                 this.played = [];
                 this.played.length = 0;  
         }   
-        
+        this.previous_randoms = JSON.parse(JSON.stringify(this.randoms));
         // Current exercise 
         this.bass('bassSnare', this.randoms[0]);
         document.getElementById('bassno').innerHTML = "&nbsp;A"+(this.randoms[0]+1)+".&nbsp;";

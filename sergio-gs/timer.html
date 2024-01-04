@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Timer</title>
+</head>
+<body>
+
+<h2>Timer:</h2>
+<p id="timer"></p>
+
+<script>
+  // Function to update the timer
+  function updateTimer(startTime) {
+    // Get the current time
+    const currentTime = new Date().getTime();
+
+    // Calculate the time elapsed since the page load
+    const elapsedTime = currentTime - startTime;
+
+    // Convert milliseconds to seconds
+    const seconds = Math.floor(elapsedTime / 1000);
+
+    // Update the timer display
+    document.getElementById("timer").textContent = formatTime(seconds);
+  }
+
+  // Function to format time as HH:MM:SS
+  function formatTime(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
+
+    return `${pad(hours)}:${pad(minutes)}:${pad(remainingSeconds)}`;
+  }
+
+  // Function to pad single-digit numbers with leading zeros
+  function pad(number) {
+    return number < 10 ? `0${number}` : number;
+  }
+
+  // Get the start time when the page loads
+  const startTime = new Date().getTime();
+
+  // Update the timer every second
+  setInterval(updateTimer, 1000);
+</script>
+
+</body>
+</html>
+

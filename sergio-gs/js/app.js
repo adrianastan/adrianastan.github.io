@@ -1,6 +1,7 @@
 //https://github.com/grantjames/metronome/blob/master/README.md
 
 var counter = document.getElementById('counter');
+
 var metronome = new Metronome();
 
 document.addEventListener('keyup', event => {
@@ -20,6 +21,7 @@ document.addEventListener('keyup', event => {
 var tempo = document.getElementById('tempo');
 tempo.textContent = metronome.tempo;
 
+/* PLAY - PAUSE */
 var playPauseIcon = document.getElementById('play-pause-icon');
 var playButton = document.getElementById('play-button');
 playButton.addEventListener('click', function() {
@@ -34,6 +36,7 @@ playButton.addEventListener('click', function() {
     }
 });
 
+/* TEMPO CHANGE */
 var tempoChangeButtons = document.getElementsByClassName('tempo-change');
 for (var i = 0; i < tempoChangeButtons.length; i++) {
     tempoChangeButtons[i].addEventListener('click', function() {
@@ -44,6 +47,7 @@ for (var i = 0; i < tempoChangeButtons.length; i++) {
 }
 
 
+/* MAX REPEAT */
 var repeatBars = document.getElementById("maxRepeat");
 metronome.repeatBars = parseInt(repeatBars.value);
 repeatBars.addEventListener('input', function() {
@@ -58,7 +62,7 @@ repeatBars.addEventListener('input', function() {
 
 
 
-
+/* CHANGER */
 var radioButtons = document.getElementsByName("changer");
 for (var i = 0; i < radioButtons.length; i++) {
     if (radioButtons[i].checked) {
@@ -78,6 +82,7 @@ document.forms["changerForm"].addEventListener("change", function() {
 
 
 
+/* WEIGHTER */
 var radioButtons = document.getElementsByName("weighter");
     for (var i = 0; i < radioButtons.length; i++) {
         if (radioButtons[i].checked) {
@@ -98,6 +103,7 @@ document.forms["weighterForm"].addEventListener("change", function() {
 
 
 
+/* Toggle settings */
 function toggleSettings() {
   var settingsDiv = document.getElementById("options");
   // Toggle the visibility of the settings div
